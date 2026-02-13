@@ -18,7 +18,16 @@ export default function Stage3Decision({
     );
   }
 
-  if (!result) return null;
+  if (!result) {
+    return (
+      <div className="rounded-lg border border-slate-200 bg-white p-8 text-center">
+        <div className="text-slate-300 text-4xl mb-3">&#x26A0;&#xFE0F;</div>
+        <p className="text-sm text-slate-500">
+          The Decision Agent could not produce a final report. Check the error above and try a new session.
+        </p>
+      </div>
+    );
+  }
 
   const verdict = extractVerdict(result.response);
 

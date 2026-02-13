@@ -60,6 +60,10 @@ export default function CouncilSession() {
           break;
         case 'error':
           s.setError(event.message);
+          s.setLoading('stage1', false);
+          s.setLoading('stage2', false);
+          s.setLoading('stage3', false);
+          s.setIsRunning(false);
           break;
         case 'complete':
           s.setIsRunning(false);

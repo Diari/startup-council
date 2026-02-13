@@ -160,7 +160,7 @@ export const useCouncilStore = create<CouncilStore>((set, get) => ({
       loading: { ...state.loading, [stage]: value },
     })),
 
-  setError: (error) => set({ error, isRunning: false }),
+  setError: (error) => set({ error }),
 
   setIsRunning: (running) => set({ isRunning: running }),
 
