@@ -11,9 +11,6 @@ export default function ExportDropdown() {
 
   const store = useCouncilStore();
 
-  // Only show when stage 3 is complete
-  if (!store.stage3Result || !store.labelMapping) return null;
-
   // Close dropdown on outside click
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -26,6 +23,9 @@ export default function ExportDropdown() {
       return () => document.removeEventListener('mousedown', handleClick);
     }
   }, [open]);
+
+  // Only show when stage 3 is complete (after all hooks)
+  if (!store.stage3Result || !store.labelMapping) return null;
 
   const snapshotData = () => ({
     startupIdea: store.startupIdea,

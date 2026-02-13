@@ -28,7 +28,6 @@ export default function CouncilSession() {
 
     const handleEvent = (event: StageEvent) => {
       const s = useCouncilStore.getState();
-
       switch (event.type) {
         case 'stage1_start':
           s.setCurrentStage(1);
