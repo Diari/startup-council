@@ -13,15 +13,6 @@ export default function CouncilSession() {
   const hasStarted = useRef(false);
   const [expandedStage, setExpandedStage] = useState(1);
 
-  // Auto-expand the latest active stage as it starts
-  const prevStageRef = useRef(store.currentStage);
-  useEffect(() => {
-    if (store.currentStage > prevStageRef.current) {
-      setExpandedStage(store.currentStage);
-      prevStageRef.current = store.currentStage;
-    }
-  }, [store.currentStage]);
-
   useEffect(() => {
     if (hasStarted.current || !store.startupIdea || !store.isRunning) return;
     hasStarted.current = true;
@@ -30,6 +21,7 @@ export default function CouncilSession() {
       const s = useCouncilStore.getState();
       switch (event.type) {
         case 'stage1_start':
+          setExpandedStage(1);
           s.setCurrentStage(1);
           s.setLoading('stage1', true);
           break;
@@ -41,6 +33,7 @@ export default function CouncilSession() {
           s.setLoading('stage1', false);
           break;
         case 'stage2_start':
+          setExpandedStage(2);
           s.setCurrentStage(2);
           s.setLoading('stage2', true);
           break;
@@ -49,6 +42,7 @@ export default function CouncilSession() {
           s.setLoading('stage2', false);
           break;
         case 'stage3_start':
+          setExpandedStage(3);
           s.setCurrentStage(3);
           s.setLoading('stage3', true);
           break;
@@ -71,7 +65,7 @@ export default function CouncilSession() {
     };
 
     runCouncil(store.startupIdea, store.selectedModel, handleEvent);
-  }, [store.startupIdea, store.isRunning]);
+  }, [store.startupIdea, store.isRunning, store.selectedModel]);
 
   return (
     <div className="mx-auto max-w-5xl">
